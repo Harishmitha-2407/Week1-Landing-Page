@@ -1,0 +1,143 @@
+/* ==========================================================================
+   Week 1 - Lumen landing page
+   Approach: MOBILE-FIRST. Base styles target phones; min-width media queries
+   progressively enhance for tablets (768px) and desktops (1024px).
+   ========================================================================== */
+
+/* ---- Design tokens (custom properties make theming easy) ---- */
+:root {
+  --bg: #ffffff;
+  --surface: #f5f7ff;
+  --text: #1b1f3b;
+  --muted: #5a6082;
+  --primary: #4f46e5;       /* contrast on white: 6.3:1 */
+  --primary-dark: #3730a3;
+  --accent: #ec4899;
+  --radius: 14px;
+  --shadow: 0 6px 24px rgba(31, 41, 100, .10);
+  --header-h: 64px;
+}
+
+/* ---- Reset & base ---- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; }
+img, svg { max-width: 100%; }
+ul, ol { list-style: none; margin: 0; padding: 0; }
+h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; }
+h1 { font-size: clamp(2rem, 6vw, 3.5rem); }   /* fluid type: scales between 2rem and 3.5rem */
+h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); text-align: center; margin-bottom: 1.5rem; }
+a { color: var(--primary); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.container { width: min(1120px, 100% - 2rem); margin-inline: auto; }
+.narrow { max-width: 560px; }
+section { padding: 3.5rem 0; }
+
+.skip-link { position: absolute; left: -999px; top: 0; background: var(--primary); color: #fff; padding: .5rem 1rem; z-index: 200; }
+.skip-link:focus { left: 0; }
+
+/* ---- Buttons ---- */
+.btn { display: inline-block; background: var(--primary); color: #fff; padding: .75rem 1.5rem; border-radius: 999px; font-weight: 600; text-decoration: none; border: 2px solid var(--primary); cursor: pointer; font-size: 1rem; transition: background .2s, transform .2s; }
+.btn:hover { background: var(--primary-dark); border-color: var(--primary-dark); transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: var(--primary); }
+.btn-ghost:hover { color: #fff; }
+.btn-small { padding: .4rem 1rem; }
+
+/* ---- Header (sticky) & navigation ---- */
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.95); backdrop-filter: blur(8px); border-bottom: 1px solid #e6e8f5; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; min-height: var(--header-h); }
+.logo { display: flex; align-items: center; gap: .5rem; font-weight: 800; font-size: 1.3rem; color: var(--primary); text-decoration: none; }
+
+/* Mobile nav: hidden dropdown panel toggled by JS via .is-open */
+.nav-toggle { background: none; border: 0; padding: .5rem; cursor: pointer; display: grid; gap: 5px; }
+.nav-toggle .bar { display: block; width: 26px; height: 3px; background: var(--text); border-radius: 2px; transition: transform .25s, opacity .25s; }
+.nav-toggle[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.primary-nav { position: absolute; top: var(--header-h); left: 0; right: 0; background: #fff; border-bottom: 1px solid #e6e8f5; max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+.primary-nav.is-open { max-height: 320px; }
+.primary-nav ul { padding: 1rem; display: grid; gap: .75rem; }
+.primary-nav a { text-decoration: none; color: var(--text); font-weight: 500; display: block; padding: .4rem 0; }
+.primary-nav a.btn { color: #fff; text-align: center; padding: .5rem 1.25rem; }
+
+/* ---- Hero ---- */
+.hero { background: linear-gradient(160deg, #eef0ff 0%, #fff 70%); padding-top: 3rem; }
+.hero-inner { display: grid; gap: 2.5rem; align-items: center; }
+.eyebrow { color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; margin: 0 0 .5rem; }
+.accent { color: #be185d; }
+.lead { font-size: 1.1rem; color: var(--muted); max-width: 55ch; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; }
+.hero-art { display: grid; place-items: center; }
+.ring { width: min(280px, 70vw); aspect-ratio: 1; border-radius: 50%; background: conic-gradient(var(--primary) 0 70%, #dfe2fb 70% 100%); display: grid; place-items: center; box-shadow: var(--shadow); }
+.ring-inner { width: 82%; aspect-ratio: 1; border-radius: 50%; background: #fff; display: grid; place-content: center; text-align: center; }
+.ring-inner strong { font-size: 2.6rem; }
+.ring-inner span { color: var(--muted); font-size: .9rem; }
+
+/* ---- Features grid: 1 column on mobile ---- */
+.features { background: var(--surface); }
+.card-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+.card { background: #fff; padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); transition: transform .2s; }
+.card:hover { transform: translateY(-4px); }
+.card .icon { font-size: 1.8rem; display: block; margin-bottom: .5rem; }
+.card p { margin: 0; color: var(--muted); }
+
+/* ---- How it works ---- */
+.steps { display: grid; gap: 1.5rem; }
+.steps li { text-align: center; }
+.step-num { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--primary); color: #fff; font-weight: 700; margin-bottom: .5rem; }
+.steps p { color: var(--muted); margin: 0; }
+
+/* ---- Pricing ---- */
+.pricing { background: var(--surface); }
+.price-grid { display: grid; gap: 1.25rem; }
+.price-card { background: #fff; padding: 1.5rem; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow); border: 2px solid transparent; }
+.price-card.featured { border-color: var(--primary); }
+.price { font-size: 2.4rem; font-weight: 800; margin: .25rem 0; }
+.price small { font-size: 1rem; font-weight: 400; color: var(--muted); }
+
+/* ---- Contact form ---- */
+.form-row { display: flex; flex-direction: column; gap: .75rem; }
+label { font-weight: 600; display: block; margin-bottom: .4rem; }
+input[type="email"] { padding: .75rem 1rem; border: 2px solid #c9cdea; border-radius: 999px; font-size: 1rem; width: 100%; }
+input[aria-invalid="true"] { border-color: #b91c1c; }
+.form-msg { min-height: 1.5em; margin: .75rem 0 0; font-weight: 600; }
+.form-msg.error { color: #b91c1c; }
+.form-msg.ok { color: #166534; }
+
+/* ---- Footer ---- */
+.site-footer { background: #14163a; color: #d5d8f5; padding: 2rem 0; }
+.footer-inner { display: flex; flex-direction: column; gap: 1rem; align-items: center; text-align: center; }
+.site-footer p { margin: 0; }
+.site-footer ul { display: flex; gap: 1.25rem; }
+.site-footer a { color: #d5d8f5; }
+
+/* ==========================================================================
+   TABLET (>= 768px)
+   ========================================================================== */
+@media (min-width: 768px) {
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps, .price-grid { grid-template-columns: repeat(3, 1fr); }
+  .form-row { flex-direction: row; }
+  .form-row .btn { flex-shrink: 0; }
+  .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; }
+}
+
+/* ==========================================================================
+   DESKTOP (>= 1024px): hamburger disappears, nav becomes a horizontal bar
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .nav-toggle { display: none; }
+  .primary-nav { position: static; max-height: none; overflow: visible; border: 0; background: none; }
+  .primary-nav ul { display: flex; align-items: center; gap: 1.75rem; padding: 0; }
+  .primary-nav a.btn { display: inline-block; }
+  .hero-inner { grid-template-columns: 1.2fr 1fr; }
+  .card-grid { grid-template-columns: repeat(3, 1fr); }
+  section { padding: 5rem 0; }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}

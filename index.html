@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!-- Week 1: Responsive landing page for "Lumen", a fictional focus-timer app.
+     Semantic structure: header > nav, main > sections, footer. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Viewport meta is essential for responsive layouts on phones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Lumen - a calm focus timer that helps you get deep work done.">
+  <title>Lumen | Focus, made simple</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===== HEADER + NAVIGATION ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="logo" aria-label="Lumen home">
+        <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="currentColor"/><path d="M16 8v8l5 3" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+        <span>Lumen</span>
+      </a>
+
+      <!-- Hamburger: visible only on small screens (see CSS) -->
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle menu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact" class="btn btn-small">Get started</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="top">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Deep work, minus the noise</p>
+          <h1>Focus for an hour. <span class="accent">Finish for the day.</span></h1>
+          <p class="lead">Lumen blends a gentle timer, distraction blocking and weekly insights so you can spend less time managing tasks and more time completing them.</p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn">Start free</a>
+            <a href="#how" class="btn btn-ghost">See how it works</a>
+          </div>
+        </div>
+        <!-- Decorative illustration built with CSS (no image requests) -->
+        <div class="hero-art" aria-hidden="true">
+          <div class="ring"><div class="ring-inner"><strong>25:00</strong><span>Focus session</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FEATURE HIGHLIGHTS (CSS Grid: 1 / 2 / 3 columns) ===== -->
+    <section class="features" id="features">
+      <div class="container">
+        <h2>Everything you need to stay in flow</h2>
+        <ul class="card-grid">
+          <li class="card"><span class="icon" aria-hidden="true">⏱</span><h3>Smart timer</h3><p>Pomodoro, 52/17 or custom cycles with soft chimes instead of jarring alarms.</p></li>
+          <li class="card"><span class="icon" aria-hidden="true">🛡</span><h3>Distraction shield</h3><p>Mute noisy sites and notifications automatically during focus blocks.</p></li>
+          <li class="card"><span class="icon" aria-hidden="true">📈</span><h3>Weekly insights</h3><p>See when you focus best and where your time really goes.</p></li>
+          <li class="card"><span class="icon" aria-hidden="true">🔄</span><h3>Sync anywhere</h3><p>Start on your laptop, finish on your phone. Your sessions follow you.</p></li>
+          <li class="card"><span class="icon" aria-hidden="true">🎧</span><h3>Ambient sounds</h3><p>Rain, cafe or brown noise, mixed to the level that helps you concentrate.</p></li>
+          <li class="card"><span class="icon" aria-hidden="true">🤝</span><h3>Team rooms</h3><p>Focus alongside teammates with shared, silent co-working sessions.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="how" id="how">
+      <div class="container">
+        <h2>How it works</h2>
+        <ol class="steps">
+          <li><span class="step-num">1</span><h3>Pick a task</h3><p>Name what you are working on.</p></li>
+          <li><span class="step-num">2</span><h3>Start a block</h3><p>Lumen silences distractions.</p></li>
+          <li><span class="step-num">3</span><h3>Review</h3><p>Get a summary of your progress.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== PRICING / CTA ===== -->
+    <section class="pricing" id="pricing">
+      <div class="container">
+        <h2>Simple pricing</h2>
+        <div class="price-grid">
+          <article class="price-card"><h3>Free</h3><p class="price">$0</p><p>Timer, 7-day history</p></article>
+          <article class="price-card featured"><h3>Pro</h3><p class="price">$5<small>/mo</small></p><p>Everything, unlimited history</p></article>
+          <article class="price-card"><h3>Team</h3><p class="price">$4<small>/user</small></p><p>Shared rooms and reports</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT (form validated with JS) ===== -->
+    <section class="contact" id="contact">
+      <div class="container narrow">
+        <h2>Join the beta</h2>
+        <form id="signup-form" novalidate>
+          <label for="email">Email address</label>
+          <div class="form-row">
+            <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+            <button type="submit" class="btn">Sign up</button>
+          </div>
+          <p id="form-msg" class="form-msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year">2026</span> Lumen. A student project.</p>
+      <nav aria-label="Footer"><ul><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#contact">Contact</a></li></ul></nav>
+    </div>
+  </footer>
+</body>
+</html>
